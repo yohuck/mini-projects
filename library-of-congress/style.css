@@ -1,0 +1,17 @@
+.filters {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#card-container{
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+#inputGroupSelect01{
+    width: 30px;
+}
+
+.card {
+    margin: 1rem 0;
+}
