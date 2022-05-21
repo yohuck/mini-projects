@@ -1,7 +1,24 @@
-let fetchURL = 'https://www.loc.gov/audio/?q=dogs&fo=json'
+let fetchURL = 'https://www.loc.gov/'
 
+
+let formatSelect = document.getElementById('format-selector')
+let queryInput = document.getElementById('queryInput');
+let submitButton = document.getElementById('submit')
 let formatAvailable = ['maps', 'audio', 'photos', 'manuscripts', 'newspapers', 'film-and-videos', 'notated-music', 'websites']
 
+submitButton.addEventListener('click',function(event){
+    console.log(event);
+    let queryConvert = queryParam(queryInput.value);
+    console.log(queryConvert)
+    let formatConvert = formatSelect.value;
+    console.log(formatConvert);
+    if (formatConvert == 'all' ) {
+        formatConvert = 'collections'
+    }
+    fetchURL = fetchURL + formatConvert + '/?' + queryConvert + '&' + 'fo=json';
+    console.log(fetchURL)
+    fetcher();
+})
 
 let test1 = {
     image: "/static/collections/groups-of-images/images/featured-naacp.jpg",
@@ -28,7 +45,7 @@ let queryParam = (query) => {
 
 
 
-var tasks = [test1, test2, test3];
+var tasks = [];
 
 let cardContainer;
 
@@ -45,13 +62,13 @@ title.innerText = task.title;
 title.className = 'card-title';
 
 let image = document.createElement('img');
-image.src = 'https://www.loc.gov' + task.image;
+image.src = task.image_url[0];
 image.classList = 'card-image';
 
 let hr = document.createElement('hr')
 
 let link = document.createElement('a');
-link.href = 'https://www.loc.gov' + task.url;
+link.href = task.url;
 link.textContent = 'Link'
 link.className = 'card-link';
 
@@ -79,15 +96,28 @@ tasks.forEach((task) => {
 
 initListOfTasks();
 
-// fetch(fetchURL, {
-//   // The browser fetches the resource from the remote server without first looking in the cache.
-//   // The browser will then update the cache with the downloaded resource.
-//   cache: 'reload',
-// })
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     console.log(data.featured_items);
-//   });
 
+let fetcher = () => {
+fetch(fetchURL, {
+  // The browser fetches the resource from the remote server without first looking in the cache.
+  // The browser will then update the cache with the downloaded resource.
+  cache: 'reload',
+})
+  .then(function (response) {
+    return response.json();
+  })
+//   .then(function (data) {
+//     console.log(data.featured_items)
+//   })
+  .then(function(data){
+      console.log(data)
+      console.log(data.results)
+      data.results.forEach(item => createTaskCard(item))
+  })
+//   .then(function(data){
+//     data.featured_items.forEach((task) => {
+//         createTaskCard(task);
+//     });
+//   }
+//   )
+}

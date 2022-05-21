@@ -17,7 +17,7 @@
         
         <div class="input-group">
             <div class="input-group-prepend">
-                <select class="custom-select" id="inputGroupSelect03">
+                <select class="custom-select" id="format-selector">
                     <option selected>Choose...</option>
                     <option value="maps">Maps</option>
                     <option value="audio">Audio</option>
@@ -27,15 +27,16 @@
                     <option value="film-and-videos">Film and Videos</option>
                     <option value="notated-music">Notated Music</option>
                     <option value="websites">Websites</option>
+                    <option value="all" data-value="'collections">All</option>
                   </select>
             </div>
             
-            <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            <input type="text" class="form-control" aria-label="Text input with dropdown button" id="queryInput">
             
             <div class="input-group-append">
                 
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
         </div>
     </div>
     <div id="card-container"></div>
